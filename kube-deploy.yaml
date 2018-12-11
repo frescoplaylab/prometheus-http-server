@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: http-page-hit
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: http-page-hit
+  template:
+    metadata:
+      labels:
+        app: http-page-hit
+    spec:
+      containers:
+      - name: http-page-hit
+        image: hegde9/prometheus-page-hit:latest
+        ports:
+        - containerPort: 8000
+          protocol: TCP
+        env:
+        - name: PORT
+          value: "8000"
